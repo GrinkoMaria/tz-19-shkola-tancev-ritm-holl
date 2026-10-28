@@ -45,12 +45,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
-    // 4. ЛОГИКА ОТПРАВКИ ФОРМЫ (добавлено сейчас)
+    // 4. ЛОГИКА ОТПРАВКИ ФОРМЫ
     // ==========================================
     const leadForm = document.querySelector('#lead-form');
 
     if (leadForm) {
-        // Подставляем UTM-метки
+        // Подставляем UTM-метки из ссылки
         const params = new URLSearchParams(window.location.search);
         const utmFields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
         utmFields.forEach(field => {
@@ -61,26 +61,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const requestIdInput = leadForm.elements.namedItem('request_id');
 
         leadForm.addEventListener('submit', (event) => {
-            // Генерируем ID
+            // Генерируем уникальный ID заявки, если его еще нет
             if (!requestIdInput.value) {
                 requestIdInput.value = 'REQ-' + crypto.randomUUID().toUpperCase();
             }
 
-            // Отправляем событие generate_lead
+            // Отправляем событие generate_lead в GA4
             sendEvent('generate_lead', {
                 lead_style: leadForm.querySelector('select[name="dance_style"]').value,
                 lead_level: leadForm.querySelector('select[name="level"]').value
             });
 
-            // Блокируем кнопку
+            // Блокируем кнопку, чтобы не нажали дважды
             const btn = leadForm.querySelector('button[type="submit"]');
             btn.textContent = 'Отправка...';
             btn.disabled = true;
             
-            // Перенаправляем на страницу спасибо через 1 секунду
+            // Ждем 2 секунды перед переходом, чтобы GA4 успел отправить данные
             setTimeout(() => {
-                window.location.href = 'thanks.html';
-            }, 1000); 
+                window.location.href = 'thanks.html'; // Перенаправление
+            }, 2000); 
         });
     }
 });
