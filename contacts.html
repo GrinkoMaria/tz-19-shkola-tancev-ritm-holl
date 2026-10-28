@@ -33,19 +33,15 @@
             <h1 class="section-title">Запись на пробное</h1>
             <p>Оставьте заявку, и мы свяжемся с вами!</p>
             <div class="contact-form">
-                <!-- ВОТ ЗДЕСЬ ВАШ URL ИЗ APPS SCRIPT -->
                 <form id="lead-form" action="https://script.google.com/macros/s/AKfycbwcm74CEO9sZv2tB-UB1_SWSqUaeHoUB5foqnO8CB0KsJIvT4SMsSbcna-DcR3iE2df/exec" method="POST" target="submission-frame">
-                    
-                    <!-- Скрытые поля -->
                     <input type="hidden" name="request_id" id="request_id" value="">
                     <input type="hidden" name="utm_source" id="utm_source" value="">
                     <input type="hidden" name="utm_medium" id="utm_medium" value="">
                     <input type="hidden" name="utm_campaign" id="utm_campaign" value="">
                     <input type="hidden" name="utm_content" id="utm_content" value="">
 
-                    <!-- Видимые поля -->
                     <input type="text" name="name" placeholder="Ваше имя" required maxlength="60">
-                    <input type="tel" name="phone" placeholder="Ваш телефон (например, +79991234567)" required maxlength="20">
+                    <input type="tel" name="phone" placeholder="Ваш телефон" required maxlength="20">
                     <input type="email" name="email" placeholder="Ваш Email (необязательно)">
                     
                     <select name="dance_style" required>
@@ -79,7 +75,6 @@
             <h2 style="font-family: 'Bebas Neue'; font-size: 40px; margin-bottom: 20px;">Наши контакты</h2>
             <p style="margin-bottom: 10px;">📍 Новосибирск, ул. Театральная, д. 19, 3 этаж</p>
             <p style="margin-bottom: 10px;">📞 <a href="tel:+79009191991">+7 900 919-19-91</a></p>
-            <p>✉️ dance@rithmall.example</p>
         </div>
     </main>
 
@@ -87,10 +82,9 @@
         <div class="container"><div class="footer-policy" style="justify-content: center; border: none; margin-top: 0;"><span>© 2025 Школа танцев «Ритм Холл».</span></div></div>
     </footer>
 
-    <!-- Скрытая рамка для ответа от Apps Script -->
     <iframe name="submission-frame" hidden title="Ответ сервера"></iframe>
-
-    <!-- Подключаем скрипт аналитики -->
-    <script src="js/analytics.js"></script>
+    
+    <!-- ВОТ ЗДЕСЬ МАГИЯ ?v=2 -->
+    <script src="js/analytics.js?v=2"></script>
 </body>
 </html>
