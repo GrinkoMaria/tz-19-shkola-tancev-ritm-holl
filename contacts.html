@@ -33,11 +33,22 @@
             <h1 class="section-title">Запись на пробное</h1>
             <p>Оставьте заявку, и мы свяжемся с вами!</p>
             <div class="contact-form">
-                <form>
-                    <input type="text" placeholder="Ваше имя" required>
-                    <input type="tel" placeholder="Ваш телефон" required>
-                    <input type="email" placeholder="Ваш Email">
-                    <select required>
+                <!-- ВОТ ЗДЕСЬ ВАШ URL ИЗ APPS SCRIPT -->
+                <form id="lead-form" action="https://script.google.com/macros/s/AKfycbwcm74CEO9sZv2tB-UB1_SWSqUaeHoUB5foqnO8CB0KsJIvT4SMsSbcna-DcR3iE2df/exec" method="POST" target="submission-frame">
+                    
+                    <!-- Скрытые поля -->
+                    <input type="hidden" name="request_id" id="request_id" value="">
+                    <input type="hidden" name="utm_source" id="utm_source" value="">
+                    <input type="hidden" name="utm_medium" id="utm_medium" value="">
+                    <input type="hidden" name="utm_campaign" id="utm_campaign" value="">
+                    <input type="hidden" name="utm_content" id="utm_content" value="">
+
+                    <!-- Видимые поля -->
+                    <input type="text" name="name" placeholder="Ваше имя" required maxlength="60">
+                    <input type="tel" name="phone" placeholder="Ваш телефон (например, +79991234567)" required maxlength="20">
+                    <input type="email" name="email" placeholder="Ваш Email (необязательно)">
+                    
+                    <select name="dance_style" required>
                         <option value="">Выберите направление</option>
                         <option value="hiphop">Хип-хоп</option>
                         <option value="heels">High heels</option>
@@ -46,12 +57,20 @@
                         <option value="stretching">Стретчинг</option>
                         <option value="kids">Детские группы</option>
                     </select>
-                    <select required>
+                    
+                    <select name="level" required>
                         <option value="">Выберите уровень</option>
                         <option value="zero">С нуля</option>
                         <option value="base">Базовый</option>
                         <option value="advanced">Продолжающий</option>
                     </select>
+
+                    <select name="preferred_time" required>
+                        <option value="">Удобное время</option>
+                        <option value="weekday_evening">Будни вечером</option>
+                        <option value="weekend">Выходные</option>
+                    </select>
+                    
                     <button type="submit" class="btn" style="width: 100%;">Отправить заявку</button>
                 </form>
             </div>
@@ -67,6 +86,11 @@
     <footer class="footer" style="margin-top: 50px;">
         <div class="container"><div class="footer-policy" style="justify-content: center; border: none; margin-top: 0;"><span>© 2025 Школа танцев «Ритм Холл».</span></div></div>
     </footer>
+
+    <!-- Скрытая рамка для ответа от Apps Script -->
+    <iframe name="submission-frame" hidden title="Ответ сервера"></iframe>
+
+    <!-- Подключаем скрипт аналитики -->
     <script src="js/analytics.js"></script>
 </body>
 </html>
