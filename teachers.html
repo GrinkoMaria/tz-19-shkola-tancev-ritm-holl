@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Педагоги — Ритм Холл</title>
+    <!-- Google Fonts: Bebas Neue для заголовков, Inter для текста -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- СБРОС И БАЗОВЫЕ ПЕРЕМЕННЫЕ ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --crimson: #E0306F;
+            --black: #141217;
+            --light: #F7F4F6;
+            --yellow: #FFC93C;
+            --white: #ffffff;
+            --gray-soft: #e9e3e8;
+        }
+
+        body {
+            background-color: var(--light);
+            font-family: 'Inter', sans-serif;
+            color: var(--black);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, .logo, .nav-link, .teacher-name, .teacher-style {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 0.03em;
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ---------- ШАПКА ---------- */
+        .header {
+            background-color: var(--black);
+            color: var(--light);
+            padding: 16px 0;
+            border-bottom: 3px solid var(--crimson);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 32px;
+            color: var(--white);
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--crimson);
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-link {
+            font-size: 20px;
+            color: var(--light);
+            transition: color 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .nav-link:hover {
+            color: var(--yellow);
+        }
+
+        .nav-link.active {
+            color: var(--crimson);
+        }
+
+        /* ---------- ЗАГОЛОВОК СТРАНИЦЫ ---------- */
+        .page-hero {
+            background: linear-gradient(135deg, var(--black) 0%, #221f26 100%);
+            color: var(--light);
+            padding: 56px 0 64px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::after {
+            content: "";
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(224, 48, 111, 0.25) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .page-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(48px, 9vw, 80px);
+            line-height: 0.95;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .page-hero h1 span {
+            color: var(--crimson);
+        }
+
+        .page-hero p {
+            font-size: 19px;
+            max-width: 640px;
+            color: #e3dde2;
+            line-height: 1.5;
+        }
+
+        /* ---------- СЕТКА ПЕДАГОГОВ ---------- */
+        .teachers-section {
+            padding: 64px 0 80px;
+        }
+
+        .teachers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        /* Карточка педагога */
+        .teacher-card {
+            background-color: var(--white);
+            border-radius: 36px;
+            overflow: hidden;
+            box-shadow: 0 10px 24px rgba(20, 18, 23, 0.06);
+            border: 1px solid rgba(224, 48, 111, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .teacher-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 32px rgba(224, 48, 111, 0.15);
+            border-color: var(--crimson);
+        }
+
+        /* Фото-заглушка */
+        .teacher-photo {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            background: linear-gradient(135deg, #2a2530 0%, #1b171f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .teacher-photo::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to top, rgba(20, 18, 23, 0.55), transparent);
+            pointer-events: none;
+        }
+
+        /* Заглушка «фото»: силуэт + подпись */
+        .photo-placeholder {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.55);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .photo-placeholder svg {
+            width: 76px;
+            height: 76px;
+            opacity: 0.85;
+        }
+
+        .photo-placeholder span {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 17px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255, 201, 60, 0.75);
+        }
+
+        /* Акцентная плашка с направлением на фото */
+        .teacher-style-tag {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            z-index: 2;
+            background-color: var(--crimson);
+            color: var(--white);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 16px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 40px;
+            line-height: 1.2;
+            box-shadow: 0 4px 12px rgba(224, 48, 111, 0.4);
+        }
+
+        /* Контент карточки */
+        .teacher-info {
+            padding: 24px 26px 30px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .teacher-name {
+            font-size: 32px;
+            color: var(--black);
+            margin-bottom: 4px;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+
+        .teacher-style {
+            font-size: 18px;
+            color: var(--crimson);
+            margin-bottom: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .teacher-desc {
+            font-size: 15px;
+            color: #2f2b32;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        /* Мини-бейджи опыта */
+        .teacher-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
+        }
+
+        .teacher-badge {
+            font-size: 13px;
+            font-weight: 600;
+            color: #4a434a;
+            background-color: var(--light);
+            border: 1px solid #e0d7df;
+            padding: 4px 12px;
+            border-radius: 30px;
+            white-space: nowrap;
+        }
+
+        .teacher-badge.accent {
+            background-color: #fff6df;
+            border-color: #f2d488;
+            color: #7a5c00;
+        }
+
+        /* ---------- ПОДВАЛ ---------- */
+        .footer {
+            background-color: #0c0a0e;
+            color: #b7b1b7;
+            padding: 56px 0 40px;
+            border-top: 2px solid var(--crimson);
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .footer-contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 17px;
+            max-width: 280px;
+        }
+
+        .footer-contacts .logo-footer {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            color: var(--white);
+            margin-bottom: 8px;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .footer-contacts .logo-footer span {
+            color: var(--crimson);
+        }
+
+        .footer a {
+            color: #d9d2d9;
+            transition: color 0.2s ease;
+        }
+
+        .footer a:hover {
+            color: var(--yellow);
+        }
+
+        .footer-phone {
+            font-weight: 600;
+            font-size: 20px;
+            color: var(--white);
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 12px;
+            align-items: center;
+        }
+
+        .social-links a {
+            display: inline-block;
+            background-color: #1f1b22;
+            padding: 8px 18px;
+            border-radius: 60px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--light);
+            border: 1px solid #3a323b;
+            transition: all 0.2s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--crimson);
+            border-color: var(--crimson);
+            color: var(--white);
+        }
+
+        .footer-policy {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid #2a242c;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            font-size: 14px;
+        }
+
+        .btn-policy {
+            background: transparent;
+            border: 1.5px solid var(--crimson);
+            color: var(--light);
+            padding: 8px 24px;
+            border-radius: 60px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-policy:hover {
+            background-color: var(--crimson);
+            color: var(--white);
+        }
+
+        /* ---------- АДАПТИВ ---------- */
+        @media (max-width: 800px) {
+            .header-inner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .nav-menu {
+                gap: 18px;
+            }
+
+            .nav-link {
+                font-size: 18px;
+            }
+
+            .page-hero {
+                padding: 40px 0 48px;
+            }
+
+            .page-hero h1 {
+                font-size: 44px;
+            }
+
+            .page-hero p {
+                font-size: 17px;
+            }
+
+            .teachers-section {
+                padding: 48px 0 60px;
+            }
+
+            .teachers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: 32px;
+            }
+
+            .footer-policy {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 18px;
+            }
+
+            .logo {
+                font-size: 28px;
+            }
+
+            .teacher-info {
+                padding: 20px 20px 26px;
+            }
+
+            .teacher-name {
+                font-size: 28px;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ШАПКА -->
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo">Ритм<span>Холл</span></div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Главная</a></li>
+                    <li><a href="styles.html" class="nav-link">Направления</a></li>
+                    <li><a href="schedule.html" class="nav-link">Расписание</a></li>
+                    <li><a href="#" class="nav-link">Цены</a></li>
+                    <li><a href="#" class="nav-link">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ЗАГОЛОВОК СТРАНИЦЫ -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Наши <span>педагоги</span></h1>
+            <p>Команда, с которой хочется двигаться. Опытные наставники, живые занятия и внимание к каждому — познакомьтесь с теми, кто будет рядом на вашем танцевальном пути.</p>
+        </div>
+    </section>
+
+    <!-- СЕТКА ПЕДАГОГОВ -->
+    <section class="teachers-section">
+        <div class="container">
+            <div class="teachers-grid">
+
+                <!-- 1. Артём Соколов — Хип-хоп -->
+                <div class="teacher-card">
+                    <div class="teacher-photo">
+                        <div class="photo-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="8" r="4"></circle>
+                                <path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"></path>
+                            </svg>
+                            <span>Фото скоро</span>
+                        </div>
+                        <div class="teacher-style-tag">Хип-хоп</div>
+                    </div>
+                    <div class="teacher-info">
+                        <div class="teacher-name">Артём Соколов</div>
+                        <div class="teacher-style">Хип-хоп 16+</div>
+                        <p class="teacher-desc">
+                            Танцует более 12 лет, из них 7 — преподаёт. Выступал в составе городских 
+                            хип-хоп команд, участник всероссийских баттлов. Умеет объяснять сложное 
+                            просто и заряжать группу энергией с первой минуты.
+                        </p>
+                        <div class="teacher-badges">
+                            <span class="teacher-badge accent">12 лет в танце</span>
+                            <span class="teacher-badge">7 лет преподавания</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Виктория Лаврова — High heels -->
+                <div class="teacher-card">
+                    <div class="teacher-photo">
+                        <div class="photo-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="8" r="4"></circle>
+                                <path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"></path>
+                            </svg>
+                            <span>Фото скоро</span>
+                        </div>
+                        <div class="teacher-style-tag">High heels</div>
+                    </div>
+                    <div class="teacher-info">
+                        <div class="teacher-name">Виктория Лаврова</div>
+                        <div class="teacher-style">High heels 18+</div>
+                        <p class="teacher-desc">
+                            Хореограф-постановщик, выпускница профильного вуза. Работает с 
+                            fashion-показами и сценическими номерами. Помогает раскрыть женственность, 
+                            поставить осанку и почувствовать уверенность на каблуках — без страха и зажимов.
+                        </p>
+                        <div class="teacher-badges">
+                            <span class="teacher-badge accent">9 лет опыта</span>
+                            <span class="teacher-badge">Постановка номеров</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Диана Орлова — Бачата -->
+                <div class="teacher-card">
+                    <div class="teacher-photo">
+                        <div class="photo-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="8" r="4"></circle>
+                                <path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"></path>
+                            </svg>
+                            <span>Фото скоро</span>
+                        </div>
+                        <div class="teacher-style-tag">Бачата</div>
+                    </div>
+                    <div class="teacher-info">
+                        <div class="teacher-name">Диана Орлова</div>
+                        <div class="teacher-style">Бачата в паре и соло 18+</div>
+                        <p class="teacher-desc">
+                            Танцует латиноамериканские танцы более 10 лет, преподаёт бачату 6 лет. 
+                            Ведёт и парные, и соло-группы, уделяет внимание музыкальности и комфорту 
+                            в паре. С ней легко даже тем, кто впервые пробует себя в латине.
+                        </p>
+                        <div class="teacher-badges">
+                            <span class="teacher-badge accent">10 лет в латине</span>
+                            <span class="teacher-badge">Парные и соло</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Ольга Северова — Контемпорари -->
+                <div class="teacher-card">
+                    <div class="teacher-photo">
+                        <div class="photo-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="8" r="4"></circle>
+                                <path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"></path>
+                            </svg>
+                            <span>Фото скоро</span>
+                        </div>
+                        <div class="teacher-style-tag">Контемпорари</div>
+                    </div>
+                    <div class="teacher-info">
+                        <div class="teacher-name">Ольга Северова</div>
+                        <div class="teacher-style">Контемпорари 16+</div>
+                        <p class="teacher-desc">
+                            Хореограф современного танца, участница фестивалей и лабораторий. 
+                            В работе соединяет технику и импровизацию, помогает найти свой язык тела. 
+                            Учит слышать музыку и не бояться выражать эмоции через движение.
+                        </p>
+                        <div class="teacher-badges">
+                            <span class="teacher-badge accent">11 лет в танце</span>
+                            <span class="teacher-badge">Импровизация</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Мария Крылова — Стретчинг -->
+                <div class="teacher-card">
+                    <div class="teacher-photo">
+                        <div class="photo-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="8" r="4"></circle>
+                                <path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"></path>
+                            </svg>
+                            <span>Фото скоро</span>
+                        </div>
+                        <div class="teacher-style-tag">Стретчинг</div>
+                    </div>
+                    <div class="teacher-info">
+                        <div class="teacher-name">Мария Крылова</div>
+                        <div class="teacher-style">Стретчинг 16+</div>
+                        <p class="teacher-desc">
+                            Сертифицированный инструктор по стретчингу и оздоровительной гимнастике. 
+                            Работает с людьми разного уровня подготовки, особое внимание — безопасности 
+                            и здоровью спины. После её занятий тело становится легче, а настроение — лучше.
+                        </p>
+                        <div class="teacher-badges">
+                            <span class="teacher-badge accent">8 лет практики</span>
+                            <span class="teacher-badge">Забота о спине</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Анна Белова — Детские группы -->
+                <div class="teacher-card">
+                    <div class="teacher-photo">
+                        <div class="photo-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="8" r="4"></circle>
+                                <path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"></path>
+                            </svg>
+                            <span>Фото скоро</span>
+                        </div>
+                        <div class="teacher-style-tag">Детские группы</div>
+                    </div>
+                    <div class="teacher-info">
+                        <div class="teacher-name">Анна Белова</div>
+                        <div class="teacher-style">Детские группы 6–9 и 10–13 лет</div>
+                        <p class="teacher-desc">
+                            Педагог-хореограф с опытом работы с детьми более 6 лет. Ведёт группы 
+                            младшего и среднего возраста, ставит отчётные номера. Умеет увлечь 
+                            и поддержать, найти подход к каждому ребёнку — на её занятиях всегда 
+                            дружелюбно и весело.
+                        </p>
+                        <div class="teacher-badges">
+                            <span class="teacher-badge accent">6+ лет с детьми</span>
+                            <span class="teacher-badge">Отчётные концерты</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОДВАЛ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-contacts">
+                    <div class="logo-footer">Ритм<span>Холл</span></div>
+                    <p>Новосибирск,<br> ул. Театральная, д. 19, 3 этаж</p>
+                    <p><a href="tel:+79009191991" class="footer-phone">+7 900 919-19-91</a></p>
+                </div>
+                <div class="footer-social">
+                    <div style="font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--white); margin-bottom: 8px;">Мы в сети</div>
+                    <div class="social-links">
+                        <a href="#" target="_blank">Instagram</a>
+                        <a href="#" target="_blank">ВКонтакте</a>
+                        <a href="#" target="_blank">Telegram</a>
+                        <a href="#" target="_blank">YouTube</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-policy">
+                <span>© 2025 Школа танцев «Ритм Холл». Все права защищены.</span>
+                <button class="btn-policy">Политика конфиденциальности</button>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

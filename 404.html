@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Страница не найдена — Ритм Холл</title>
+    <!-- Google Fonts: Bebas Neue для заголовков, Inter для текста -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- СБРОС И БАЗОВЫЕ ПЕРЕМЕННЫЕ ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --crimson: #E0306F;
+            --black: #141217;
+            --light: #F7F4F6;
+            --yellow: #FFC93C;
+            --white: #ffffff;
+            --gray-soft: #e9e3e8;
+        }
+
+        body {
+            background-color: var(--light);
+            font-family: 'Inter', sans-serif;
+            color: var(--black);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3, .logo, .nav-link, .error-title, .btn {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 0.03em;
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ---------- ШАПКА ---------- */
+        .header {
+            background-color: var(--black);
+            color: var(--light);
+            padding: 16px 0;
+            border-bottom: 3px solid var(--crimson);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            font-size: 32px;
+            color: var(--white);
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--crimson);
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-link {
+            font-size: 20px;
+            color: var(--light);
+            transition: color 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .nav-link:hover {
+            color: var(--yellow);
+        }
+
+        /* ---------- БЛОК 404 ---------- */
+        .error-section {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 64px 0 80px;
+        }
+
+        .error-card {
+            width: 100%;
+            background: linear-gradient(160deg, var(--black) 0%, #221f26 100%);
+            color: var(--light);
+            border-radius: 40px;
+            padding: 64px 48px 68px;
+            border-top: 6px solid var(--crimson);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 20px 48px rgba(20, 18, 23, 0.18);
+        }
+
+        .error-card::after {
+            content: "";
+            position: absolute;
+            bottom: -40%;
+            left: -10%;
+            width: 520px;
+            height: 520px;
+            background: radial-gradient(circle, rgba(255, 201, 60, 0.16) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .error-card::before {
+            content: "";
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 480px;
+            height: 480px;
+            background: radial-gradient(circle, rgba(224, 48, 111, 0.22) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .error-inner {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Крупные цифры 404 */
+        .error-code {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(120px, 26vw, 220px);
+            line-height: 0.85;
+            letter-spacing: 0.02em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(4px, 1.5vw, 16px);
+            margin-bottom: 10px;
+            animation: pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        }
+
+        .error-code span {
+            color: var(--crimson);
+            text-shadow: 0 10px 32px rgba(224, 48, 111, 0.45);
+        }
+
+        .error-code .zero {
+            color: var(--yellow);
+            text-shadow: 0 10px 32px rgba(255, 201, 60, 0.35);
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.85); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .error-label {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            letter-spacing: 0.14em;
+            color: var(--yellow);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .error-title {
+            font-size: clamp(36px, 6vw, 58px);
+            line-height: 0.98;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .error-title span {
+            color: var(--crimson);
+        }
+
+        .error-desc {
+            font-size: 18px;
+            color: #d5cdd4;
+            max-width: 520px;
+            line-height: 1.55;
+            margin-bottom: 36px;
+        }
+
+        .error-desc strong {
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        /* Кнопка «На главную» */
+        .btn {
+            display: inline-block;
+            background-color: var(--crimson);
+            color: var(--white);
+            font-size: 24px;
+            letter-spacing: 0.06em;
+            padding: 15px 48px;
+            border-radius: 60px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.22s ease;
+            text-transform: uppercase;
+            box-shadow: 0 8px 20px rgba(224, 48, 111, 0.35);
+            line-height: 1.2;
+        }
+
+        .btn:hover {
+            background-color: var(--yellow);
+            color: var(--black);
+            box-shadow: 0 10px 24px rgba(255, 201, 60, 0.5);
+            transform: translateY(-2px);
+            border-color: var(--black);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:focus-visible {
+            outline: 3px solid var(--yellow);
+            outline-offset: 3px;
+        }
+
+        .error-hint {
+            font-size: 15px;
+            color: #a49aa3;
+            margin-top: 20px;
+        }
+
+        .error-hint a {
+            color: var(--yellow);
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            transition: color 0.2s ease;
+        }
+
+        .error-hint a:hover {
+            color: var(--white);
+        }
+
+        /* ---------- ПОДВАЛ ---------- */
+        .footer {
+            background-color: #0c0a0e;
+            color: #b7b1b7;
+            padding: 56px 0 40px;
+            border-top: 2px solid var(--crimson);
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .footer-contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 17px;
+            max-width: 280px;
+        }
+
+        .footer-contacts .logo-footer {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            color: var(--white);
+            margin-bottom: 8px;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .footer-contacts .logo-footer span {
+            color: var(--crimson);
+        }
+
+        .footer a {
+            color: #d9d2d9;
+            transition: color 0.2s ease;
+        }
+
+        .footer a:hover {
+            color: var(--yellow);
+        }
+
+        .footer-phone {
+            font-weight: 600;
+            font-size: 20px;
+            color: var(--white);
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 12px;
+            align-items: center;
+        }
+
+        .social-links a {
+            display: inline-block;
+            background-color: #1f1b22;
+            padding: 8px 18px;
+            border-radius: 60px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--light);
+            border: 1px solid #3a323b;
+            transition: all 0.2s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--crimson);
+            border-color: var(--crimson);
+            color: var(--white);
+        }
+
+        .footer-policy {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid #2a242c;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            font-size: 14px;
+            max-width: 1240px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+
+        .btn-policy {
+            background: transparent;
+            border: 1.5px solid var(--crimson);
+            color: var(--light);
+            padding: 8px 24px;
+            border-radius: 60px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-policy:hover {
+            background-color: var(--crimson);
+            color: var(--white);
+        }
+
+        /* ---------- АДАПТИВ ---------- */
+        @media (max-width: 800px) {
+            .header-inner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .nav-menu {
+                gap: 18px;
+            }
+
+            .nav-link {
+                font-size: 18px;
+            }
+
+            .error-section {
+                padding: 48px 0 60px;
+            }
+
+            .error-card {
+                padding: 44px 26px 48px;
+                border-radius: 32px;
+            }
+
+            .error-desc {
+                font-size: 16px;
+                margin-bottom: 28px;
+            }
+
+            .btn {
+                font-size: 20px;
+                padding: 13px 32px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: 32px;
+            }
+
+            .footer-policy {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 18px;
+            }
+
+            .header-inner {
+                padding: 0 18px;
+            }
+
+            .logo {
+                font-size: 28px;
+            }
+
+            .error-card {
+                padding: 36px 20px 40px;
+                border-radius: 28px;
+            }
+
+            .error-title {
+                font-size: 34px;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ШАПКА -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">Ритм<span>Холл</span></div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Главная</a></li>
+                    <li><a href="styles.html" class="nav-link">Направления</a></li>
+                    <li><a href="schedule.html" class="nav-link">Расписание</a></li>
+                    <li><a href="prices.html" class="nav-link">Цены</a></li>
+                    <li><a href="contacts.html" class="nav-link">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- БЛОК 404 -->
+    <section class="error-section">
+        <div class="container">
+            <div class="error-card">
+                <div class="error-inner">
+                    <div class="error-code" aria-hidden="true">
+                        <span>4</span><span class="zero">0</span><span>4</span>
+                    </div>
+                    <div class="error-label">Упс, что-то не так</div>
+                    <h1 class="error-title">Страница <span>не найдена</span></h1>
+                    <p class="error-desc">
+                        Похоже, эта страница ушла на репетицию и не вернулась. 
+                        Но <strong>на главной всё на месте</strong> — там расписание, направления и запись на пробное.
+                    </p>
+                    <a href="index.html" class="btn">На главную</a>
+                    <p class="error-hint">
+                        Или сразу <a href="contacts.html">оставьте заявку</a> — перезвоним и подскажем, куда двигаться дальше.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОДВАЛ -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-contacts">
+                <div class="logo-footer">Ритм<span>Холл</span></div>
+                <p>Новосибирск,<br> ул. Театральная, д. 19, 3 этаж</p>
+                <p><a href="tel:+79009191991" class="footer-phone">+7 900 919-19-91</a></p>
+            </div>
+            <div class="footer-social">
+                <div style="font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--white); margin-bottom: 8px;">Мы в сети</div>
+                <div class="social-links">
+                    <a href="#" target="_blank">Instagram</a>
+                    <a href="#" target="_blank">ВКонтакте</a>
+                    <a href="#" target="_blank">Telegram</a>
+                    <a href="#" target="_blank">YouTube</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-policy">
+            <span>© 2025 Школа танцев «Ритм Холл». Все права защищены.</span>
+            <button class="btn-policy">Политика конфиденциальности</button>
+        </div>
+    </footer>
+
+</body>
+</html>

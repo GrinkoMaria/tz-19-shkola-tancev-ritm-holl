@@ -1,0 +1,271 @@
+  /* ---------- СБРОС И БАЗОВЫЕ ПЕРЕМЕННЫЕ ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --crimson: #E0306F;
+            --black: #141217;
+            --light: #F7F4F6;
+            --yellow: #FFC93C;
+            --white: #ffffff;
+            --gray-soft: #e9e3e8;
+        }
+
+        body {
+            background-color: var(--light);
+            font-family: 'Inter', sans-serif;
+            color: var(--black);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, .logo, .nav-link, .btn, .card-title {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 0.03em;
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ---------- ШАПКА ---------- */
+        .header {
+            background-color: var(--black);
+            color: var(--light);
+            padding: 16px 0;
+            border-bottom: 3px solid var(--crimson);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 32px;
+            color: var(--white);
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--crimson);
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-link {
+            font-size: 20px;
+            color: var(--light);
+            transition: color 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .nav-link:hover {
+            color: var(--yellow);
+        }
+
+        /* ---------- HERO ---------- */
+        .hero {
+            background: linear-gradient(135deg, var(--black) 0%, #221f26 100%);
+            color: var(--light);
+            padding: 70px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(224, 48, 111, 0.25) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 10vw, 84px);
+            line-height: 0.95;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 span {
+            color: var(--crimson);
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            font-weight: 400;
+            max-width: 650px;
+            margin-bottom: 32px;
+            color: #e3dde2;
+            line-height: 1.45;
+        }
+
+        .hero-subtitle strong {
+            color: var(--yellow);
+            font-weight: 600;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--crimson);
+            color: var(--white);
+            font-size: 24px;
+            padding: 14px 44px;
+            border-radius: 60px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 20px rgba(224, 48, 111, 0.35);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-family: 'Bebas Neue', sans-serif;
+            line-height: 1.2;
+            border: 2px solid transparent;
+        }
+
+        .btn:hover {
+            background-color: var(--yellow);
+            color: var(--black);
+            box-shadow: 0 10px 24px rgba(255, 201, 60, 0.5);
+            transform: translateY(-2px);
+            border-color: var(--black);
+        }
+
+        .btn-price {
+            font-size: 18px;
+            color: var(--light);
+            margin-left: 16px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0;
+        }
+
+        .btn-price s {
+            opacity: 0.6;
+            margin-right: 6px;
+        }
+
+        /* ---------- НАПРАВЛЕНИЯ ---------- */
+        .directions {
+            padding: 80px 0 70px;
+            background-color: var(--light);
+        }
+
+        .section-title {
+            font-size: clamp(40px, 6vw, 56px);
+            color: var(--black);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            display: inline-block;
+            border-bottom: 5px solid var(--crimson);
+            padding-bottom: 8px;
+            line-height: 1;
+        }
+
+        .directions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 28px;
+            margin-top: 48px;
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: 32px;
+            padding: 28px 24px 32px;
+            box-shadow: 0 10px 24px rgba(20, 18, 23, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid rgba(224, 48, 111, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 32px rgba(224, 48, 111, 0.15);
+            border-color: var(--crimson);
+        }
+
+        .card-title {
+            font-size: 30px;
+            color: var(--crimson);
+            margin-bottom: 12px;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        .card-desc {
+            font-size: 16px;
+            color: #2f2b32;
+            line-height: 1.45;
+            flex-grow: 1;
+        }
+
+        .card-tag {
+            display: inline-block;
+            background-color: var(--yellow);
+            color: var(--black);
+            font-weight: 600;
+            font-size: 14px;
+            padding: 4px 16px;
+            border-radius: 30px;
+            margin-top: 20px;
+            align-self: flex-start;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.02em;
+        }
+
+        /* ---------- ПРЕИМУЩЕСТВА ---------- */
+        .advantages {
+            background-color: var(--black);
+            color: var(--light);
+            padding: 70px 0 80px;
+        }
+
+        .advantages .section-title {
+            color: var(--white);
+            border-bottom-color: var(--yellow);
+            margin-bottom: 48px;
+        }

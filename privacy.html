@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Политика конфиденциальности — Ритм Холл</title>
+    <!-- Google Fonts: Bebas Neue для заголовков, Inter для текста -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- СБРОС И БАЗОВЫЕ ПЕРЕМЕННЫЕ ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --crimson: #E0306F;
+            --black: #141217;
+            --light: #F7F4F6;
+            --yellow: #FFC93C;
+            --white: #ffffff;
+            --gray-soft: #e9e3e8;
+        }
+
+        body {
+            background-color: var(--light);
+            font-family: 'Inter', sans-serif;
+            color: var(--black);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, .logo, .nav-link, .doc-title {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 0.03em;
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ---------- ШАПКА ---------- */
+        .header {
+            background-color: var(--black);
+            color: var(--light);
+            padding: 16px 0;
+            border-bottom: 3px solid var(--crimson);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            font-size: 32px;
+            color: var(--white);
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--crimson);
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-link {
+            font-size: 20px;
+            color: var(--light);
+            transition: color 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .nav-link:hover {
+            color: var(--yellow);
+        }
+
+        /* ---------- ЗАГОЛОВОК СТРАНИЦЫ ---------- */
+        .page-hero {
+            background: linear-gradient(135deg, var(--black) 0%, #221f26 100%);
+            color: var(--light);
+            padding: 48px 0 56px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::after {
+            content: "";
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 480px;
+            height: 480px;
+            background: radial-gradient(circle, rgba(224, 48, 111, 0.22) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .page-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(40px, 7vw, 64px);
+            line-height: 0.98;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .page-hero h1 span {
+            color: var(--crimson);
+        }
+
+        .page-hero p {
+            font-size: 17px;
+            max-width: 600px;
+            color: #cfc9cf;
+            line-height: 1.5;
+        }
+
+        /* ---------- ТЕКСТ ПОЛИТИКИ ---------- */
+        .doc-section {
+            padding: 56px 0 80px;
+        }
+
+        .doc-card {
+            background-color: var(--white);
+            border-radius: 36px;
+            padding: 44px 40px 48px;
+            box-shadow: 0 10px 24px rgba(20, 18, 23, 0.06);
+            border: 1px solid rgba(224, 48, 111, 0.1);
+        }
+
+        .doc-updated {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #7a5c00;
+            background-color: #fff6df;
+            border: 1px solid #f2d488;
+            padding: 5px 16px;
+            border-radius: 30px;
+            margin-bottom: 28px;
+            letter-spacing: 0.01em;
+        }
+
+        .doc-card h2 {
+            font-size: 30px;
+            color: var(--black);
+            text-transform: uppercase;
+            margin: 36px 0 14px;
+            line-height: 1.15;
+        }
+
+        .doc-card h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .doc-card h2 span {
+            color: var(--crimson);
+        }
+
+        .doc-card p {
+            font-size: 16px;
+            color: #2f2b32;
+            margin-bottom: 14px;
+        }
+
+        .doc-card ul {
+            list-style: none;
+            margin: 0 0 16px 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .doc-card ul li {
+            font-size: 16px;
+            color: #2f2b32;
+            padding-left: 24px;
+            position: relative;
+            line-height: 1.55;
+        }
+
+        .doc-card ul li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--crimson);
+            font-weight: 700;
+        }
+
+        .doc-card strong {
+            color: var(--black);
+            font-weight: 600;
+        }
+
+        .doc-card a {
+            color: var(--crimson);
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            transition: color 0.2s ease;
+        }
+
+        .doc-card a:hover {
+            color: var(--black);
+        }
+
+        /* Разделитель между разделами */
+        .doc-divider {
+            height: 1px;
+            background: linear-gradient(to right, var(--crimson), transparent);
+            margin: 28px 0;
+            opacity: 0.35;
+        }
+
+        /* Блок с реквизитами */
+        .doc-requisites {
+            background-color: var(--light);
+            border-radius: 24px;
+            padding: 24px 26px;
+            border: 1px dashed #d6ccd5;
+            margin-top: 8px;
+        }
+
+        .doc-requisites p {
+            margin-bottom: 6px;
+        }
+
+        .doc-requisites p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ---------- ПОДВАЛ ---------- */
+        .footer {
+            background-color: #0c0a0e;
+            color: #b7b1b7;
+            padding: 56px 0 40px;
+            border-top: 2px solid var(--crimson);
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .footer-contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 17px;
+            max-width: 280px;
+        }
+
+        .footer-contacts .logo-footer {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            color: var(--white);
+            margin-bottom: 8px;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .footer-contacts .logo-footer span {
+            color: var(--crimson);
+        }
+
+        .footer a {
+            color: #d9d2d9;
+            transition: color 0.2s ease;
+        }
+
+        .footer a:hover {
+            color: var(--yellow);
+        }
+
+        .footer-phone {
+            font-weight: 600;
+            font-size: 20px;
+            color: var(--white);
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 12px;
+            align-items: center;
+        }
+
+        .social-links a {
+            display: inline-block;
+            background-color: #1f1b22;
+            padding: 8px 18px;
+            border-radius: 60px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--light);
+            border: 1px solid #3a323b;
+            transition: all 0.2s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--crimson);
+            border-color: var(--crimson);
+            color: var(--white);
+        }
+
+        .footer-policy {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid #2a242c;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            font-size: 14px;
+            max-width: 1240px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+
+        .btn-policy {
+            background: transparent;
+            border: 1.5px solid var(--crimson);
+            color: var(--light);
+            padding: 8px 24px;
+            border-radius: 60px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-policy:hover {
+            background-color: var(--crimson);
+            color: var(--white);
+        }
+
+        /* ---------- АДАПТИВ ---------- */
+        @media (max-width: 800px) {
+            .header-inner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .nav-menu {
+                gap: 18px;
+            }
+
+            .nav-link {
+                font-size: 18px;
+            }
+
+            .page-hero {
+                padding: 36px 0 44px;
+            }
+
+            .page-hero h1 {
+                font-size: 40px;
+            }
+
+            .page-hero p {
+                font-size: 16px;
+            }
+
+            .doc-section {
+                padding: 40px 0 60px;
+            }
+
+            .doc-card {
+                padding: 30px 22px 34px;
+                border-radius: 28px;
+            }
+
+            .doc-card h2 {
+                font-size: 26px;
+                margin-top: 30px;
+            }
+
+            .doc-card p,
+            .doc-card ul li {
+                font-size: 15px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: 32px;
+            }
+
+            .footer-policy {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 18px;
+            }
+
+            .header-inner {
+                padding: 0 18px;
+            }
+
+            .logo {
+                font-size: 28px;
+            }
+
+            .doc-card {
+                padding: 26px 18px 30px;
+            }
+
+            .doc-requisites {
+                padding: 20px 18px;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ШАПКА -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">Ритм<span>Холл</span></div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Главная</a></li>
+                    <li><a href="styles.html" class="nav-link">Направления</a></li>
+                    <li><a href="schedule.html" class="nav-link">Расписание</a></li>
+                    <li><a href="prices.html" class="nav-link">Цены</a></li>
+                    <li><a href="contacts.html" class="nav-link">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ЗАГОЛОВОК СТРАНИЦЫ -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Политика <span>конфиденциальности</span></h1>
+            <p>Базовый документ об обработке персональных данных в соответствии с Федеральным законом № 152-ФЗ «О персональных данных».</p>
+        </div>
+    </section>
+
+    <!-- ТЕКСТ ПОЛИТИКИ -->
+    <section class="doc-section">
+        <div class="container">
+            <div class="doc-card">
+
+                <div class="doc-updated">Редакция от 1 января 2025 года</div>
+
+                <h2><span>1.</span> Общие положения</h2>
+                <p>
+                    Настоящая Политика конфиденциальности (далее — Политика) определяет порядок обработки 
+                    и меры по обеспечению безопасности персональных данных пользователей сайта школы танцев 
+                    «Ритм Холл» (далее — Оператор), расположенного по адресу: <strong>Новосибирск, ул. Театральная, д. 19, 3 этаж</strong>.
+                </p>
+                <p>
+                    Политика разработана в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ 
+                    «О персональных данных» и иными нормативными правовыми актами Российской Федерации 
+                    в области защиты персональных данных.
+                </p>
+                <p>
+                    Используя сайт и отправляя заявку через форму обратной связи, вы подтверждаете согласие 
+                    с условиями настоящей Политики. Если вы не согласны с условиями, пожалуйста, не отправляйте 
+                    свои персональные данные.
+                </p>
+
+                <div class="doc-divider"></div>
+
+                <h2><span>2.</span> Какие данные мы обрабатываем</h2>
+                <p>Оператор может обрабатывать следующие персональные данные, которые вы предоставляете добровольно:</p>
+                <ul>
+                    <li>фамилия, имя (или имя, которым вы предпочитаете называться);</li>
+                    <li>номер телефона;</li>
+                    <li>адрес электронной почты;</li>
+                    <li>выбранное направление, уровень подготовки и удобное время занятий;</li>
+                    <li>иные сведения, которые вы указываете в форме заявки или в переписке с Оператором.</li>
+                </ul>
+                <p>
+                    Также автоматически могут собираться обезличенные данные о посещении сайта 
+                    (IP-адрес, тип браузера, страницы посещения) с помощью файлов cookie и сервисов 
+                    веб-аналитики. Эти данные не позволяют идентифицировать вас как личность 
+                    и используются исключительно для улучшения работы сайта.
+                </p>
+
+                <div class="doc-divider"></div>
+
+                <h2><span>3.</span> Цели обработки персональных данных</h2>
+                <p>Персональные данные обрабатываются в следующих целях:</p>
+                <ul>
+                    <li>связь с вами для подтверждения записи на пробное занятие или в группу;</li>
+                    <li>консультирование по направлениям, расписанию и стоимости занятий;</li>
+                    <li>информирование об изменениях в расписании, акциях и мероприятиях школы (при наличии согласия);</li>
+                    <li>исполнение договора на оказание танцевальных услуг;</li>
+                    <li>улучшение качества обслуживания и работы сайта.</li>
+                </ul>
+
+                <div class="doc-divider"></div>
+
+                <h2><span>4.</span> Правовые основания обработки</h2>
+                <p>
+                    Обработка персональных данных осуществляется на основании:
+                </p>
+                <ul>
+                    <li>вашего согласия на обработку персональных данных, выраженного путём отправки формы на сайте или иным способом;</li>
+                    <li>исполнения договора, стороной которого вы являетесь;</li>
+                    <li>требований законодательства Российской Федерации.</li>
+                </ul>
+
+                <div class="doc-divider"></div>
+
+                <h2><span>5.</span> Порядок и условия обработки</h2>
+                <p>
+                    Оператор обрабатывает персональные данные с использованием средств автоматизации 
+                    и без них, соблюдая конфиденциальность и обеспечивая безопасность данных.
+                </p>
+                <p>Обработка включает: сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (предоставление, доступ), блокирование, удаление и уничтожение персональных данных.</p>
+                <p>
+                    Срок хранения персональных данных — не дольше, чем этого требуют цели обработки, 
+                    если иной срок не установлен законодательством. Вы можете отозвать согласие 
+                    на обработку в любой момент, направив запрос Оператору.
+                </p>
+                <p>
+                    Оператор не передаёт персональные данные третьим лицам, за исключением случаев, 
+                    предусмотренных законодательством, либо с вашего отдельного согласия.
+                </p>
+
+                <div class="doc-divider"></div>
+
+                <h2><span>6.</span> Права субъекта персональных данных</h2>
+                <p>Вы имеете право:</p>
+                <ul>
+                    <li>получать информацию об обработке ваших персональных данных;</li>
+                    <li>требовать уточнения, блокирования или уничтожения данных, если они являются неполными, устаревшими, неточными или незаконно полученными;</li>
+                    <li>отозвать согласие на обработку персональных данных;</li>
+                    <li>обжаловать действия Оператора в уполномоченный орган по защите прав субъектов персональных данных (Роскомнадзор) или в судебном порядке.</li>
+                </ul>
+                <p>
+                    Для реализации своих прав направьте обращение на адрес электронной почты или по телефону, 
+                    указанным в разделе «Контакты» настоящей Политики.
+                </p>
+
+                <div class="doc-divider"></div>
+
+                <h2><span>7.</span> Меры по защите персональных данных</h2>
+                <p>
+                    Оператор принимает необходимые правовые, организационные и технические меры 
+                    для защиты персональных данных от неправомерного или случайного доступа, 
+                    уничтожения, изменения, блокирования, копирования, предоставления, распространения, 
+                    а также от иных неправомерных действий.
+                </p>
+                <p>
+                    Доступ к персональным данным имеют только уполномоченные сотрудники, 
+                    связанные обязательствами о неразглашении.
+                </p>
+
+                <div class="doc-divider"></div>
+
+                <h2><span>8.</span> Файлы cookie</h2>
+                <p>
+                    Сайт может использовать файлы cookie для корректной работы и анализа посещаемости. 
+                    Вы можете отключить cookie в настройках браузера, однако это может повлиять 
+                    на работу отдельных функций сайта.
+                </p>
+
+                <div class="doc-divider"></div>
+
+                <h2><span>9.</span> Изменение Политики</h2>
+                <p>
+                    Оператор вправе вносить изменения в настоящую Политику. Актуальная редакция всегда 
+                    доступна на данной странице. Продолжая пользоваться сайтом после внесения изменений, 
+                    вы соглашаетесь с обновлённой редакцией.
+                </p>
+
+                <div class="doc-divider"></div>
+
+                <h2><span>10.</span> Контакты Оператора</h2>
+                <div class="doc-requisites">
+                    <p><strong>Школа танцев «Ритм Холл»</strong></p>
+                    <p>Адрес: Новосибирск, ул. Театральная, д. 19, 3 этаж</p>
+                    <p>Телефон: <a href="tel:+79009191991">+7 900 919-19-91</a></p>
+                    <p>Email: <a href="mailto:info@rhythmhall.ru">info@rhythmhall.ru</a></p>
+                </div>
+                <p style="margin-top: 18px;">
+                    По всем вопросам, связанным с обработкой персональных данных, вы можете 
+                    обратиться к Оператору по указанным контактам.
+                </p>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОДВАЛ -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-contacts">
+                <div class="logo-footer">Ритм<span>Холл</span></div>
+                <p>Новосибирск,<br> ул. Театральная, д. 19, 3 этаж</p>
+                <p><a href="tel:+79009191991" class="footer-phone">+7 900 919-19-91</a></p>
+            </div>
+            <div class="footer-social">
+                <div style="font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--white); margin-bottom: 8px;">Мы в сети</div>
+                <div class="social-links">
+                    <a href="#" target="_blank">Instagram</a>
+                    <a href="#" target="_blank">ВКонтакте</a>
+                    <a href="#" target="_blank">Telegram</a>
+                    <a href="#" target="_blank">YouTube</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-policy">
+            <span>© 2025 Школа танцев «Ритм Холл». Все права защищены.</span>
+            <button class="btn-policy">Политика конфиденциальности</button>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты и запись — Ритм Холл</title>
+    <!-- Google Fonts: Bebas Neue для заголовков, Inter для текста -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- СБРОС И БАЗОВЫЕ ПЕРЕМЕННЫЕ ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --crimson: #E0306F;
+            --black: #141217;
+            --light: #F7F4F6;
+            --yellow: #FFC93C;
+            --white: #ffffff;
+            --gray-soft: #e9e3e8;
+        }
+
+        body {
+            background-color: var(--light);
+            font-family: 'Inter', sans-serif;
+            color: var(--black);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, .logo, .nav-link, .form-title, .contact-title, .btn {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 0.03em;
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ---------- ШАПКА ---------- */
+        .header {
+            background-color: var(--black);
+            color: var(--light);
+            padding: 16px 0;
+            border-bottom: 3px solid var(--crimson);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 32px;
+            color: var(--white);
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--crimson);
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-link {
+            font-size: 20px;
+            color: var(--light);
+            transition: color 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .nav-link:hover {
+            color: var(--yellow);
+        }
+
+        .nav-link.active {
+            color: var(--crimson);
+        }
+
+        /* ---------- ЗАГОЛОВОК СТРАНИЦЫ ---------- */
+        .page-hero {
+            background: linear-gradient(135deg, var(--black) 0%, #221f26 100%);
+            color: var(--light);
+            padding: 56px 0 64px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::after {
+            content: "";
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(224, 48, 111, 0.25) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .page-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(48px, 9vw, 80px);
+            line-height: 0.95;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .page-hero h1 span {
+            color: var(--crimson);
+        }
+
+        .page-hero p {
+            font-size: 19px;
+            max-width: 640px;
+            color: #e3dde2;
+            line-height: 1.5;
+        }
+
+        /* ---------- ОСНОВНОЙ БЛОК: ФОРМА + КОНТАКТЫ ---------- */
+        .contacts-section {
+            padding: 64px 0 80px;
+        }
+
+        .contacts-layout {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 36px;
+            align-items: start;
+        }
+
+        /* ---------- ФОРМА ---------- */
+        .form-card {
+            background-color: var(--white);
+            border-radius: 36px;
+            padding: 40px 36px 44px;
+            box-shadow: 0 10px 24px rgba(20, 18, 23, 0.06);
+            border: 1px solid rgba(224, 48, 111, 0.1);
+        }
+
+        .form-title {
+            font-size: 40px;
+            color: var(--black);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            line-height: 1.1;
+        }
+
+        .form-title span {
+            color: var(--crimson);
+        }
+
+        .form-subtitle {
+            font-size: 15px;
+            color: #7b737b;
+            margin-bottom: 28px;
+            line-height: 1.5;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 24px;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-field.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #4a434a;
+            letter-spacing: 0.02em;
+        }
+
+        .form-label .req {
+            color: var(--crimson);
+            margin-left: 2px;
+        }
+
+        .form-input,
+        .form-select {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: var(--black);
+            background-color: var(--light);
+            border: 2px solid #e0d7df;
+            border-radius: 16px;
+            padding: 13px 16px;
+            transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+            width: 100%;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23141217' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 16px;
+            padding-right: 44px;
+            cursor: pointer;
+        }
+
+        .form-input::placeholder {
+            color: #a49aa3;
+        }
+
+        .form-input:hover,
+        .form-select:hover {
+            border-color: var(--crimson);
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--crimson);
+            background-color: var(--white);
+            box-shadow: 0 0 0 3px rgba(224, 48, 111, 0.15);
+        }
+
+        /* Чекбокс согласия */
+        .checkbox-field {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .checkbox-field input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            margin-top: 1px;
+            accent-color: var(--crimson);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .checkbox-text {
+            font-size: 14px;
+            color: #4a434a;
+            line-height: 1.5;
+        }
+
+        .checkbox-text a {
+            color: var(--crimson);
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .checkbox-text a:hover {
+            color: var(--black);
+        }
+
+        /* Кнопка отправки */
+        .btn {
+            display: inline-block;
+            background-color: var(--crimson);
+            color: var(--white);
+            font-size: 24px;
+            letter-spacing: 0.06em;
+            padding: 15px 44px;
+            border-radius: 60px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.22s ease;
+            text-transform: uppercase;
+            box-shadow: 0 8px 20px rgba(224, 48, 111, 0.35);
+            line-height: 1.2;
+            width: 100%;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .btn:hover {
+            background-color: var(--yellow);
+            color: var(--black);
+            box-shadow: 0 10px 24px rgba(255, 201, 60, 0.5);
+            transform: translateY(-2px);
+            border-color: var(--black);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:focus-visible {
+            outline: 3px solid var(--yellow);
+            outline-offset: 3px;
+        }
+
+        .form-note {
+            font-size: 13px;
+            color: #a49aa3;
+            margin-top: 14px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        /* ---------- БЛОК КОНТАКТОВ ---------- */
+        .contacts-aside {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            position: sticky;
+            top: 100px;
+        }
+
+        .contact-card {
+            background: linear-gradient(160deg, var(--black) 0%, #221f26 100%);
+            color: var(--light);
+            border-radius: 36px;
+            padding: 36px 32px 38px;
+            border-top: 5px solid var(--crimson);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::after {
+            content: "";
+            position: absolute;
+            bottom: -40%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 201, 60, 0.14) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .contact-card-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-title {
+            font-size: 30px;
+            color: var(--white);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .contact-title span {
+            color: var(--yellow);
+        }
+
+        .contact-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-bottom: 26px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .contact-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background-color: rgba(224, 48, 111, 0.18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 1px solid rgba(224, 48, 111, 0.3);
+        }
+
+        .contact-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--yellow);
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .contact-body {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .contact-label {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #a49aa3;
+            font-weight: 500;
+        }
+
+        .contact-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--white);
+            transition: color 0.2s ease;
+            word-break: break-word;
+        }
+
+        .contact-value:hover {
+            color: var(--yellow);
+        }
+
+        .contact-address {
+            font-size: 16px;
+            color: #d5cdd4;
+            line-height: 1.5;
+        }
+
+        /* Кнопки мессенджеров */
+        .messengers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .btn-messenger {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(255, 255, 255, 0.07);
+            color: var(--light);
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 11px 22px;
+            border-radius: 60px;
+            border: 1px solid #3a323b;
+            transition: all 0.2s ease;
+            flex: 1 1 auto;
+            justify-content: center;
+            white-space: nowrap;
+        }
+
+        .btn-messenger svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--light);
+            flex-shrink: 0;
+            transition: fill 0.2s ease;
+        }
+
+        .btn-messenger:hover {
+            background-color: var(--crimson);
+            border-color: var(--crimson);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .btn-messenger:hover svg {
+            fill: var(--white);
+        }
+
+        .btn-messenger:focus-visible {
+            outline: 3px solid var(--yellow);
+            outline-offset: 3px;
+        }
+
+        /* Мини-карточка режима работы */
+        .hours-card {
+            background-color: var(--white);
+            border-radius: 28px;
+            padding: 26px 28px;
+            box-shadow: 0 10px 24px rgba(20, 18, 23, 0.06);
+            border: 1px solid rgba(224, 48, 111, 0.1);
+        }
+
+        .hours-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 24px;
+            color: var(--black);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            letter-spacing: 0.04em;
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            font-size: 15px;
+            padding: 7px 0;
+            border-bottom: 1px dashed #ece4eb;
+            color: #2f2b32;
+        }
+
+        .hours-row:last-child {
+            border-bottom: none;
+        }
+
+        .hours-row span:first-child {
+            color: #7b737b;
+        }
+
+        .hours-row span:last-child {
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        /* ---------- ПОДВАЛ ---------- */
+        .footer {
+            background-color: #0c0a0e;
+            color: #b7b1b7;
+            padding: 56px 0 40px;
+            border-top: 2px solid var(--crimson);
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .footer-contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 17px;
+            max-width: 280px;
+        }
+
+        .footer-contacts .logo-footer {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            color: var(--white);
+            margin-bottom: 8px;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .footer-contacts .logo-footer span {
+            color: var(--crimson);
+        }
+
+        .footer a {
+            color: #d9d2d9;
+            transition: color 0.2s ease;
+        }
+
+        .footer a:hover {
+            color: var(--yellow);
+        }
+
+        .footer-phone {
+            font-weight: 600;
+            font-size: 20px;
+            color: var(--white);
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 12px;
+            align-items: center;
+        }
+
+        .social-links a {
+            display: inline-block;
+            background-color: #1f1b22;
+            padding: 8px 18px;
+            border-radius: 60px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--light);
+            border: 1px solid #3a323b;
+            transition: all 0.2s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--crimson);
+            border-color: var(--crimson);
+            color: var(--white);
+        }
+
+        .footer-policy {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid #2a242c;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            font-size: 14px;
+        }
+
+        .btn-policy {
+            background: transparent;
+            border: 1.5px solid var(--crimson);
+            color: var(--light);
+            padding: 8px 24px;
+            border-radius: 60px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-policy:hover {
+            background-color: var(--crimson);
+            color: var(--white);
+        }
+
+        /* ---------- АДАПТИВ ---------- */
+        @media (max-width: 960px) {
+            .contacts-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .contacts-aside {
+                position: static;
+            }
+
+            .form-card {
+                padding: 32px 28px 36px;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .header-inner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .nav-menu {
+                gap: 18px;
+            }
+
+            .nav-link {
+                font-size: 18px;
+            }
+
+            .page-hero {
+                padding: 40px 0 48px;
+            }
+
+            .page-hero h1 {
+                font-size: 44px;
+            }
+
+            .page-hero p {
+                font-size: 17px;
+            }
+
+            .contacts-section {
+                padding: 48px 0 60px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-title {
+                font-size: 32px;
+            }
+
+            .btn {
+                font-size: 20px;
+                padding: 13px 32px;
+            }
+
+            .contact-card {
+                padding: 30px 26px 32px;
+            }
+
+            .contact-title {
+                font-size: 26px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: 32px;
+            }
+
+            .footer-policy {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 18px;
+            }
+
+            .logo {
+                font-size: 28px;
+            }
+
+            .form-card {
+                padding: 26px 20px 30px;
+                border-radius: 28px;
+            }
+
+            .contact-card {
+                border-radius: 28px;
+                padding: 26px 22px 28px;
+            }
+
+            .btn-messenger {
+                flex: 1 1 100%;
+            }
+
+            .contact-value {
+                font-size: 16px;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ШАПКА -->
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo">Ритм<span>Холл</span></div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Главная</a></li>
+                    <li><a href="styles.html" class="nav-link">Направления</a></li>
+                    <li><a href="schedule.html" class="nav-link">Расписание</a></li>
+                    <li><a href="prices.html" class="nav-link">Цены</a></li>
+                    <li><a href="contacts.html" class="nav-link active">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ЗАГОЛОВОК СТРАНИЦЫ -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Контакты и <span>запись</span></h1>
+            <p>Оставьте заявку — перезвоним, ответим на вопросы и подберём удобную группу. Или напишите нам в Telegram или WhatsApp, если так комфортнее.</p>
+        </div>
+    </section>
+
+    <!-- КОНТЕНТ: ФОРМА + КОНТАКТЫ -->
+    <section class="contacts-section">
+        <div class="container">
+            <div class="contacts-layout">
+
+                <!-- ФОРМА ЗАЯВКИ -->
+                <div class="form-card">
+                    <h2 class="form-title">Оставить <span>заявку</span></h2>
+                    <p class="form-subtitle">Заполните форму — и мы свяжемся с вами в течение дня, чтобы подтвердить запись на пробное занятие.</p>
+
+                    <form class="form-grid" action="#" method="post" novalidate>
+
+                        <!-- Имя -->
+                        <div class="form-field">
+                            <label for="name" class="form-label">Имя <span class="req">*</span></label>
+                            <input type="text" id="name" name="name" class="form-input" placeholder="Как к вам обращаться" required>
+                        </div>
+
+                        <!-- Телефон -->
+                        <div class="form-field">
+                            <label for="phone" class="form-label">Телефон <span class="req">*</span></label>
+                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-field full">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="you@example.com">
+                        </div>
+
+                        <!-- Направление -->
+                        <div class="form-field">
+                            <label for="style" class="form-label">Направление</label>
+                            <select id="style" name="style" class="form-select">
+                                <option value="">Выберите направление</option>
+                                <option value="Хип-хоп">Хип-хоп 16+</option>
+                                <option value="High heels">High heels 18+</option>
+                                <option value="Бачата">Бачата в паре и соло 18+</option>
+                                <option value="Контемпорари">Контемпорари 16+</option>
+                                <option value="Стретчинг">Стретчинг 16+</option>
+                                <option value="Детские группы">Детские группы 6–9 и 10–13 лет</option>
+                                <option value="Не знаю">Пока не знаю — помогите выбрать</option>
+                            </select>
+                        </div>
+
+                        <!-- Уровень -->
+                        <div class="form-field">
+                            <label for="level" class="form-label">Уровень</label>
+                            <select id="level" name="level" class="form-select">
+                                <option value="">Выберите уровень</option>
+                                <option value="Начинающий">Начинающий — впервые</option>
+                                <option value="Базовый">Базовый — немного танцевал(а)</option>
+                                <option value="Средний">Средний — занимаюсь регулярно</option>
+                                <option value="Продвинутый">Продвинутый — хочу расти дальше</option>
+                            </select>
+                        </div>
+
+                        <!-- Удобное время -->
+                        <div class="form-field full">
+                            <label for="time" class="form-label">Удобное время</label>
+                            <select id="time" name="time" class="form-select">
+                                <option value="">Выберите удобное время</option>
+                                <option value="Утро">Утро — до 12:00</option>
+                                <option value="День">День — 12:00–17:00</option>
+                                <option value="Вечер">Вечер — 17:00–22:00</option>
+                                <option value="Выходные">Выходные — суббота и воскресенье</option>
+                                <option value="Любое">Любое — подстроюсь под расписание</option>
+                            </select>
+                        </div>
+
+                        <!-- Чекбокс согласия -->
+                        <div class="checkbox-field">
+                            <input type="checkbox" id="consent" name="consent" required>
+                            <label for="consent" class="checkbox-text">
+                                Я согласен(а) на обработку персональных данных и принимаю
+                                <a href="#">политику конфиденциальности</a>.
+                            </label>
+                        </div>
+
+                        <!-- Кнопка -->
+                        <div class="form-field full">
+                            <button type="submit" class="btn">Записаться на пробное</button>
+                            <p class="form-note">Пробное занятие — 300 ₽. Никакого спама, только по делу.</p>
+                        </div>
+
+                    </form>
+                </div>
+
+                <!-- КОНТАКТЫ -->
+                <aside class="contacts-aside">
+
+                    <!-- Основная карточка контактов -->
+                    <div class="contact-card">
+                        <div class="contact-card-inner">
+                            <h2 class="contact-title">Наши <span>контакты</span></h2>
+
+                            <ul class="contact-list">
+                                <!-- Адрес -->
+                                <li class="contact-item">
+                                    <div class="contact-icon">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                            <circle cx="12" cy="10" r="3"></circle>
+                                        </svg>
+                                    </div>
+                                    <div class="contact-body">
+                                        <span class="contact-label">Адрес</span>
+                                        <span class="contact-address">Новосибирск,<br>ул. Театральная, д. 19, 3 этаж</span>
+                                    </div>
+                                </li>
+
+                                <!-- Телефон -->
+                                <li class="contact-item">
+                                    <div class="contact-icon">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="contact-body">
+                                        <span class="contact-label">Телефон</span>
+                                        <a href="tel:+79009191991" class="contact-value">+7 900 919-19-91</a>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <!-- Мессенджеры -->
+                            <div class="messengers">
+                                <a href="https://t.me/rhythmhall" target="_blank" rel="noopener" class="btn-messenger">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M21.94 4.64a1.5 1.5 0 0 0-1.53-.22L3.3 11.66a1.5 1.5 0 0 0 .1 2.82l4.28 1.36 1.66 5.18a1.5 1.5 0 0 0 2.62.46l2.32-2.7 4.2 3.1a1.5 1.5 0 0 0 2.36-.9l3.1-14.8a1.5 1.5 0 0 0-.99-1.54zM9.87 14.7l-.6 3.02-1.03-3.2 8.63-5.6-7 5.78z"></path>
+                                    </svg>
+                                    Telegram
+                                </a>
+                                <a href="https://wa.me/79009191991" target="_blank" rel="noopener" class="btn-messenger">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.23-1.1a7.9 7.9 0 0 0 3.8.97h.01a7.94 7.94 0 0 0 5.56-13.55zM12.05 18.5a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.65.67-2.44-.16-.25a6.6 6.6 0 1 1 5.59 3.1zm3.62-4.94c-.2-.1-1.17-.58-1.35-.64-.18-.07-.31-.1-.44.1-.13.2-.5.64-.62.77-.11.13-.23.15-.43.05a5.4 5.4 0 0 1-1.59-.98 6 6 0 0 1-1.1-1.37c-.11-.2-.01-.3.09-.4.09-.09.2-.23.3-.35.1-.11.13-.19.2-.32.06-.13.03-.24-.02-.34-.05-.1-.44-1.06-.6-1.45-.16-.38-.32-.33-.44-.33h-.38c-.13 0-.34.05-.52.24-.18.2-.68.66-.68 1.62s.7 1.88.8 2.01c.1.13 1.38 2.1 3.34 2.95.47.2.83.32 1.12.41.47.15.9.13 1.24.08.38-.06 1.17-.48 1.34-.94.16-.47.16-.87.11-.95-.04-.08-.17-.13-.37-.23z"></path>
+                                    </svg>
+                                    WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Режим работы -->
+                    <div class="hours-card">
+                        <div class="hours-title">Режим работы</div>
+                        <div class="hours-row">
+                            <span>Пн–Пт</span>
+                            <span>09:00 – 22:00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span>Суббота</span>
+                            <span>10:00 – 19:00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span>Воскресенье</span>
+                            <span>11:00 – 18:00</span>
+                        </div>
+                    </div>
+
+                </aside>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОДВАЛ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-contacts">
+                    <div class="logo-footer">Ритм<span>Холл</span></div>
+                    <p>Новосибирск,<br> ул. Театральная, д. 19, 3 этаж</p>
+                    <p><a href="tel:+79009191991" class="footer-phone">+7 900 919-19-91</a></p>
+                </div>
+                <div class="footer-social">
+                    <div style="font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--white); margin-bottom: 8px;">Мы в сети</div>
+                    <div class="social-links">
+                        <a href="#" target="_blank">Instagram</a>
+                        <a href="#" target="_blank">ВКонтакте</a>
+                        <a href="#" target="_blank">Telegram</a>
+                        <a href="#" target="_blank">YouTube</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-policy">
+                <span>© 2025 Школа танцев «Ритм Холл». Все права защищены.</span>
+                <button class="btn-policy">Политика конфиденциальности</button>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
