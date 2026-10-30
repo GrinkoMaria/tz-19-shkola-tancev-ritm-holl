@@ -35,10 +35,10 @@
 
 **Скриншоты настроек ManyChat:**
 
-![Работа бота в Telegram](../screens/telegram_bot.png)
+![Работа бота в Telegram](https://github.com/GrinkoMaria/tz-19-shkola-tancev-ritm-holl/blob/main/screens/telegram_bot.png?raw=true)
 *Рисунок 1. Диалог с Telegram-ботом*
 
-![Сценарий в ManyChat](../screens/manychat_flow.png)
+![Сценарий в ManyChat](https://github.com/GrinkoMaria/tz-19-shkola-tancev-ritm-holl/blob/main/screens/manychat_flow.png?raw=true)
 *Рисунок 2. Настроенный сценарий в ManyChat*
 
 ## 7. Вывод
